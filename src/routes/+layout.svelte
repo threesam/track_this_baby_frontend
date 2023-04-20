@@ -3,14 +3,14 @@
 </script>
 
 <div class="max-w-2xl mx-auto">
-	<header class="p-5">
-		<a class="text-xl" href="/">track that baby</a>
+	<header class="p-5 bg-red-950">
+		<a class="text-xl text-white" href="/">track that baby</a>
 	</header>
-	<main class="border border-black p-5">
+	<main class="p-5">
 		<slot />
 	</main>
-	<footer class="p-5">
-		<p class="footer__text">
+	<footer class="p-5 bg-red-950">
+		<p class="text-white min-w-full">
 			Made with <svg
 				data-sanity-icon="heart-filled"
 				width="1em"
