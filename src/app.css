@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;500&family=Source+Sans+Pro:ital,wght@0,200;0,400;0,600;1,200&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.clip-path-top {
+		clip-path: polygon(0 6rem, 100% 0, 100% calc(100% - 6rem), 0 100%);
+	}
+	.clip-path-bottom {
+		clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6rem), 0 100%);
+	}
+}
+
+@layer base {
+	h1 {
+		@apply text-5xl;
+	}
+	h2 {
+		@apply text-4xl;
+	}
+	h3 {
+		@apply text-3xl;
+	}
+	h4 {
+		@apply text-2xl;
+	}
+	h5 {
+		@apply text-xl;
+	}
+}

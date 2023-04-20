@@ -1,8 +1,12 @@
-<div class="container">
+<script>
+	import '../app.css'
+</script>
+
+<div class="max-w-2xl mx-auto">
 	<header class="header">
-		<a class="header__title" href="/">SvelteKit + Sanity</a>
+		<a class="header__title" href="/">track that baby</a>
 	</header>
-	<main>
+	<main class="border border-black p-5">
 		<slot />
 	</main>
 	<footer class="footer">
@@ -20,7 +24,7 @@
 					stroke="currentColor"
 					stroke-width="1.2"
 				/></svg
-			> at Sanity
+			> for Azalea
 		</p>
 	</footer>
 </div>

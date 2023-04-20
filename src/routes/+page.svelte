@@ -6,7 +6,7 @@
 	export let data: PageData;
 </script>
 
-<section>
+<section class="flex flex-col gap-5">
 	{#if data.events.length}
 		{#each data.events as event}
 			<Card {event} />
