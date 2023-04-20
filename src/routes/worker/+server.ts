@@ -4,7 +4,6 @@ export async function GET({ url }) {
 	console.log('slug', slug);
 	const countRes = await fetch(`https://track_this_baby.threesam.workers.dev?event=${slug}`);
 	const text = await countRes.text();
-	console.log('text', text);
 
 	return new Response(text);
 }
