@@ -3,6 +3,7 @@
 	import { urlFor } from '$lib/utils/image';
 	import type { Event } from '$lib/utils/sanity';
 	import {client} from '$lib/utils/sanity'
+	import { fade } from 'svelte/transition';
 
 
 	$: count = 0
@@ -28,13 +29,15 @@
 
 <div>
 	<div class="grid grid-cols-2 lg:gap-5 items-center justify-center">
-		{#if !showCount}
-			{#if event.mainImage?.asset}
-				<img class="{index % 2 === 0 ? "order-last" : ""}" src="{event.mainImage?.asset.url}" alt="{event.mainImage.altText}">
+		<div class="relative grid place-content-center aspect-square {index % 2 === 0 ? "order-last" : ""}">
+			{#if !showCount}
+				{#if event.mainImage?.asset}
+					<img class="absolute inset-0" in:fade={{delay:400}} out:fade={{duration:300}} src="{event.mainImage?.asset.url}" alt="{event.mainImage.altText}">
+				{/if}
+			{:else}
+				<span in:fade={{delay:400}} out:fade={{duration:300}}>count is: {count}</span>
 			{/if}
-		{:else}
-			<span>{count} times counted</span>
-		{/if}
+		</div>
 		<button class={`text-3xl h-full p-5 text-white lowercase ${color}`} on:click={() => countEvent(event.slug.current)}>
 			{event.title}
 		</button>
