@@ -6,7 +6,7 @@
 	export let data: PageData;
 </script>
 
-<section class="flex flex-col lg:gap-5">
+<section class="flex flex-col">
 	{#if data.events.length}
 		{#each data.events as event, index}
 			<Card {event} {index} />

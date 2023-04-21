@@ -4,6 +4,8 @@
 	import type { Event } from '$lib/utils/sanity';
 	import {client} from '$lib/utils/sanity'
 	import { fade } from 'svelte/transition';
+	import { Confetti } from "svelte-confetti"
+
 
 
 	$: count = 0
@@ -22,13 +24,13 @@
 
 	export let event: Event;
 	export let index: number;
-	console.log('🚀 ~ file: Card.svelte:17 ~ event:', event)
 
-	const color = event.tags?.includes('yikes') ? 'bg-red-950' : 'bg-black'
+	const isYikes = event.tags?.includes('yikes')
+	const color = isYikes ? 'bg-red-950' : 'bg-black'
 </script>
 
 <div>
-	<div class="grid grid-cols-2 lg:gap-5 items-center justify-center">
+	<div class="grid grid-cols-2 items-center justify-center">
 		<div class="relative grid place-content-center aspect-square {index % 2 === 0 ? "order-last" : ""}">
 			{#if !showCount}
 				{#if event.mainImage?.asset}
@@ -38,8 +40,11 @@
 				<p class="flex items-center gap-2" in:fade={{delay:400}} out:fade={{duration:300}}><span class="pt-1">count is:</span> <span class="text-3xl">{count}</span></p>
 			{/if}
 		</div>
-		<button class={`text-3xl h-full p-5 text-white transition-colors duration-500 lowercase ${!showCount ? color : 'bg-green-950'}`} on:click={() => countEvent(event.slug.current)}>
+		<button class={`grid place-content-center text-3xl h-full p-5 text-white transition-colors duration-500 lowercase ${!showCount ? color : isYikes ? 'bg-red-700' : 'bg-green-950'}`} on:click={() => countEvent(event.slug.current)}>
 			{event.title}
+			{#if showCount}
+				<Confetti amount={100} colorArray={isYikes ? ["red", "black"] : ["green", "white", "pink"]} />
+			{/if}
 		</button>
 	</div>
 </div>
