@@ -4,25 +4,39 @@
 	import type { Event } from '$lib/utils/sanity';
 	import {client} from '$lib/utils/sanity'
 
+
 	$: count = 0
+	$: showCount = false
 
 	async function countEvent(slug: string) {
 		const countRes = await fetch(`/worker?event=${slug}`, {method: 'POST'})
 		const text = await countRes.text()
 
 		count = text.split('|').length
+		showCount = true
+		setTimeout(() => {
+			showCount = false
+		}, 3000)
 	}
 
 	export let event: Event;
+	export let index: number;
+	console.log('🚀 ~ file: Card.svelte:17 ~ event:', event)
+
+	const color = event.tags?.includes('yikes') ? 'bg-red-950' : 'bg-black'
 </script>
 
 <div>
-	<div class="flex gap-5 items-center">
-		<button class="text-3xl p-5 bg-black text-white lowercase" on:click={() => countEvent(event.slug.current)}>
-			{event.title}
-		</button>
-		{#if count}
+	<div class="grid grid-cols-2 lg:gap-5 items-center justify-center">
+		{#if !showCount}
+			{#if event.mainImage?.asset}
+				<img class="{index % 2 === 0 ? "order-last" : ""}" src="{event.mainImage?.asset.url}" alt="{event.mainImage.altText}">
+			{/if}
+		{:else}
 			<span>{count} times counted</span>
 		{/if}
+		<button class={`text-3xl h-full p-5 text-white lowercase ${color}`} on:click={() => countEvent(event.slug.current)}>
+			{event.title}
+		</button>
 	</div>
 </div>

@@ -18,14 +18,31 @@ export const client = createClient({
 
 export async function getEvents(): Promise<Event[]> {
 	return await client.fetch(
-		groq`*[_type == "event" && defined(slug.current)] | order(_createdAt desc)`
+		groq`*[_type == "event" && defined(slug.current)]{
+			...,
+			mainImage{
+				asset->{
+					...
+				}
+			}
+		} | order(_createdAt desc)`
 	);
 }
 
 export async function getEvent(slug: string): Promise<Event> {
-	return await client.fetch(groq`*[_type == "event" && slug.current == $slug][0]`, {
-		slug
-	});
+	return await client.fetch(
+		groq`*[_type == "event" && slug.current == $slug][0]{
+		...,
+		mainImage{
+			asset->{
+				...
+			}
+		}
+	}`,
+		{
+			slug
+		}
+	);
 }
 
 export async function updateEvent(slug: string): Promise<Event> {
@@ -43,4 +60,5 @@ export interface Event {
 	mainImage?: ImageAsset;
 	count?: number;
 	body: PortableTextBlock[];
+	tags: string[];
 }

@@ -2,11 +2,11 @@
 	import '../app.css'
 </script>
 
-<div class="max-w-2xl mx-auto">
-	<header class="p-5 bg-red-950">
+<div class="max-w-2xl mx-auto font-display">
+	<header class="p-5 bg-slate-700">
 		<a class="text-xl text-white" href="/">track that baby</a>
 	</header>
-	<main class="p-5 mt-0">
+	<main class="lg:p-5 mt-0">
 		<slot />
 	</main>
 	<footer class="p-5 border-t-2 border-red-950">
