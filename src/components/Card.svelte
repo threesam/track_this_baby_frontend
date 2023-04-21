@@ -32,13 +32,13 @@
 		<div class="relative grid place-content-center aspect-square {index % 2 === 0 ? "order-last" : ""}">
 			{#if !showCount}
 				{#if event.mainImage?.asset}
-					<img class="absolute inset-0" in:fade={{delay:400}} out:fade={{duration:300}} src="{event.mainImage?.asset.url}" alt="{event.mainImage.altText}">
+					<img class="absolute inset-0" in:fade={{delay:400}} out:fade={{duration:400}} src="{event.mainImage?.asset.url}" alt="{event.mainImage.altText}">
 				{/if}
 			{:else}
-				<span in:fade={{delay:400}} out:fade={{duration:300}}>count is: {count}</span>
+				<p class="flex items-center gap-2" in:fade={{delay:400}} out:fade={{duration:300}}><span class="pt-1">count is:</span> <span class="text-3xl">{count}</span></p>
 			{/if}
 		</div>
-		<button class={`text-3xl h-full p-5 text-white lowercase ${color}`} on:click={() => countEvent(event.slug.current)}>
+		<button class={`text-3xl h-full p-5 text-white transition-colors duration-500 lowercase ${!showCount ? color : 'bg-green-950'}`} on:click={() => countEvent(event.slug.current)}>
 			{event.title}
 		</button>
 	</div>
