@@ -28,6 +28,7 @@
 		<div
 			transition:fade
 			on:click={() => (showModal = false)}
+			on:keypress={() => (showModal = false)}
 			class="absolute inset-0 z-10 flex justify-center bg-black/70"
 		>
 			<h1 in:typewriter class="mt-[30%] text-white">okay, chill dude..</h1>
