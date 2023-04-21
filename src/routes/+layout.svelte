@@ -1,7 +1,16 @@
 <script>
 	import '../app.css';
 	import { fade } from 'svelte/transition';
+	import Confetti from 'svelte-confetti'
 	let showModal = false;
+	let showHearts = false
+
+	function explodeHearts() {
+		showHearts = true;
+		setTimeout(() => {
+			showHearts = false;
+		}, 2000);
+	}
 
 	function typewriter(node, { speed = 1 }) {
 		const valid = node.childNodes.length === 1 && node.childNodes[0].nodeType === Node.TEXT_NODE;
@@ -44,9 +53,11 @@
 		<slot />
 	</main>
 	<footer class="flex w-full justify-center p-5">
-		<p class="flex items-center gap-1">
+		<p class="flex items-center gap-1 relative">
 			<span class="text-xl"> made with </span>
 			<svg
+				on:click={explodeHearts}
+				on:keypress={explodeHearts}
 				class="text-red-950"
 				data-sanity-icon="heart-filled"
 				width="2em"
@@ -61,7 +72,13 @@
 					stroke-width="1.2"
 				/></svg
 			>
+			{#if showHearts}
+				<div class="absolute inset-0 flex justify-center">
+					<Confetti size=25 colorArray={["url(https://www.onlygfx.com/wp-content/uploads/2016/05/hand-drawn-heart-1.png)"]} />
+				</div>
+			{/if}
 			<span class="text-xl"> for Azalea </span>
 		</p>
 	</footer>
 </div>
+
