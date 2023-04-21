@@ -26,7 +26,7 @@
 <div class="relative font-display">
 	{#if showModal}
 		<div
-			transition:fade
+			transition:fade={{duration:200}}
 			on:click={() => (showModal = false)}
 			on:keypress={() => (showModal = false)}
 			class="absolute inset-0 z-10 flex justify-center bg-black/70"
