@@ -3,8 +3,8 @@
 </script>
 
 <div class="max-w-2xl mx-auto font-display">
-	<header class="p-5 bg-slate-700">
-		<a class="text-xl text-white" href="/">track that baby</a>
+	<header class="w-full uppercase flex justify-center p-5 bg-slate-400">
+		<a class="text-xl text-black" href="/">track that baby</a>
 	</header>
 	<main class="lg:p-5 mt-0">
 		<slot />
