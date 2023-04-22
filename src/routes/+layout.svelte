@@ -1,4 +1,6 @@
 <script>
+	export let data
+	console.log(Object.entries(data.eventData))
 	import '../app.css';
 	import { fade } from 'svelte/transition';
 	import Confetti from 'svelte-confetti'
@@ -38,9 +40,26 @@
 			transition:fade={{duration:200}}
 			on:click={() => (showModal = false)}
 			on:keypress={() => (showModal = false)}
-			class="absolute inset-0 z-10 flex justify-center bg-black/70"
+			class="absolute inset-0 z-10 flex justify-center bg-black"
 		>
+		<button class="absolute top-5 right-5 text-red-400" on:click={() => (showModal = false)}>close</button>
+		{#if !data.eventData}
 			<h1 in:typewriter class="mt-[30%] text-white">okay, chill dude..</h1>
+		{:else}
+			<ul class="mt-12 text-white flex flex-col">
+				{#each Object.entries(data.eventData) as [key, value]}
+					<li class="py-5 grid grid-cols-2 items-center">
+						<h3 class="text-right pr-5">{key}</h3>
+						<div class="border-l-2 border-white pl-5 text-sm lg:text-base">
+							<h5 class="text-slate-400">last tracked</h5>
+							<p class="pb-3">{#if value.data}{value.timeSinceLastEvent}{:else}never{/if}</p>
+							<h5 class="text-slate-400">total clicks</h5>
+							<p>{value.data?.split('|').length ?? 0}</p>
+						</div>
+					</li>
+				{/each}
+			</ul>
+		{/if}
 		</div>
 	{/if}
 	<header class="flex w-full justify-center p-5 text-xl uppercase">

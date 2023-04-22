@@ -18,8 +18,9 @@ export async function load({ fetch }) {
 		};
 	}
 
+	console.log({ eventData });
+
 	if (events) {
-		console.log('🚀 ~ file: +page.server.ts:22 ~ load ~ events:', events);
 		return {
 			events,
 			eventData

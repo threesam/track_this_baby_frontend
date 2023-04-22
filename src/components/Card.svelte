@@ -2,7 +2,6 @@
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/utils/image';
 	import type { Event } from '$lib/utils/sanity';
-	import { client } from '$lib/utils/sanity';
 	import { fade } from 'svelte/transition';
 	import { Confetti } from 'svelte-confetti';
 
@@ -35,12 +34,13 @@
 			{#if !showCount}
 				{#if event.mainImage?.asset}
 					<img
-						class="absolute inset-0"
+						class="absolute inset-0 hover:opacity-0"
 						in:fade={{ delay: 400 }}
 						out:fade={{ duration: 400 }}
 						src={event.mainImage?.asset.url}
 						alt={event.mainImage.altText}
 					/>
+					
 				{/if}
 			{:else}
 				<p class="flex items-center gap-2" in:fade={{ delay: 400 }} out:fade={{ duration: 300 }}>
