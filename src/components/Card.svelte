@@ -34,13 +34,12 @@
 			{#if !showCount}
 				{#if event.mainImage?.asset}
 					<img
-						class="absolute inset-0 hover:opacity-0"
+						class="absolute inset-0 transition duration-300 hover:opacity-0"
 						in:fade={{ delay: 400 }}
 						out:fade={{ duration: 400 }}
 						src={event.mainImage?.asset.url}
 						alt={event.mainImage.altText}
 					/>
-					
 				{/if}
 			{:else}
 				<p class="flex items-center gap-2" in:fade={{ delay: 400 }} out:fade={{ duration: 300 }}>

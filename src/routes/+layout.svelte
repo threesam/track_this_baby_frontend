@@ -1,11 +1,11 @@
 <script>
-	export let data
-	console.log(Object.entries(data.eventData))
+	export let data;
+	console.log(Object.entries(data.eventData));
 	import '../app.css';
 	import { fade } from 'svelte/transition';
-	import Confetti from 'svelte-confetti'
+	import Confetti from 'svelte-confetti';
 	let showModal = false;
-	let showHearts = false
+	let showHearts = false;
 
 	function explodeHearts() {
 		showHearts = true;
@@ -37,29 +37,33 @@
 <div class="relative font-display">
 	{#if showModal}
 		<div
-			transition:fade={{duration:200}}
+			transition:fade={{ duration: 200 }}
 			on:click={() => (showModal = false)}
 			on:keypress={() => (showModal = false)}
 			class="absolute inset-0 z-10 flex justify-center bg-black"
 		>
-		<button class="absolute top-5 right-5 text-red-400" on:click={() => (showModal = false)}>close</button>
-		{#if !data.eventData}
-			<h1 in:typewriter class="mt-[30%] text-white">okay, chill dude..</h1>
-		{:else}
-			<ul class="mt-12 text-white flex flex-col">
-				{#each Object.entries(data.eventData) as [key, value]}
-					<li class="py-5 grid grid-cols-2 items-center">
-						<h3 class="text-right pr-5">{key}</h3>
-						<div class="border-l-2 border-white pl-5 text-sm lg:text-base">
-							<h5 class="text-slate-400">last tracked</h5>
-							<p class="pb-3">{#if value.data}{value.timeSinceLastEvent}{:else}never{/if}</p>
-							<h5 class="text-slate-400">total clicks</h5>
-							<p>{value.data?.split('|').length ?? 0}</p>
-						</div>
-					</li>
-				{/each}
-			</ul>
-		{/if}
+			<button class="absolute right-5 top-5 text-red-400" on:click={() => (showModal = false)}
+				>close</button
+			>
+			{#if !data.eventData}
+				<h1 in:typewriter class="mt-[30%] text-white">okay, chill dude..</h1>
+			{:else}
+				<ul class="mt-12 flex flex-col text-white">
+					{#each Object.entries(data.eventData) as [key, value]}
+						<li class="grid grid-cols-2 items-center py-5">
+							<h3 class="pr-5 text-right">{key}</h3>
+							<div class="border-l-2 border-white pl-5 text-sm lg:text-base">
+								<h5 class="text-slate-400">last tracked</h5>
+								<p class="pb-3">
+									{#if value.data}{value.timeSinceLastEvent}{:else}never{/if}
+								</p>
+								<h5 class="text-slate-400">total clicks</h5>
+								<p>{value.data?.split('|').length ?? 0}</p>
+							</div>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
 	{/if}
 	<header class="flex w-full justify-center p-5 text-xl uppercase">
@@ -72,7 +76,7 @@
 		<slot />
 	</main>
 	<footer class="flex w-full justify-center p-5">
-		<p class="flex items-center gap-1 relative">
+		<p class="relative flex items-center gap-1">
 			<span class="text-xl"> made with </span>
 			<svg
 				on:click={explodeHearts}
@@ -93,11 +97,15 @@
 			>
 			{#if showHearts}
 				<div class="absolute inset-0 flex justify-center">
-					<Confetti size=25 colorArray={["url(https://www.onlygfx.com/wp-content/uploads/2016/05/hand-drawn-heart-1.png)"]} />
+					<Confetti
+						size="25"
+						colorArray={[
+							'url(https://www.onlygfx.com/wp-content/uploads/2016/05/hand-drawn-heart-1.png)'
+						]}
+					/>
 				</div>
 			{/if}
 			<span class="text-xl"> for Azalea </span>
 		</p>
 	</footer>
 </div>
-
