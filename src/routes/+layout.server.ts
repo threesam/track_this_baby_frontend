@@ -2,7 +2,8 @@ import { getEvents } from '$lib/utils/sanity';
 import { error } from '@sveltejs/kit';
 import { format, formatDistance, subHours } from 'date-fns';
 
-export async function load({ fetch }) {
+export async function load({ fetch, url }) {
+	console.log('🚀 ~ file: +layout.server.ts:6 ~ load ~ url:', url);
 	const events = await getEvents();
 
 	const slugs = events.map((event) => event.slug.current);
@@ -17,8 +18,6 @@ export async function load({ fetch }) {
 			timeSinceLastEvent: timeSinceLastEvent(data ?? '')
 		};
 	}
-
-	console.log({ eventData });
 
 	if (events) {
 		return {

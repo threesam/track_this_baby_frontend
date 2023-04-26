@@ -25,7 +25,7 @@ export async function getEvents(): Promise<Event[]> {
 					...
 				}
 			}
-		} | order(_createdAt desc)`
+		} | order(_createdAt asc)`
 	);
 }
 
