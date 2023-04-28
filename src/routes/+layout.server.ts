@@ -16,7 +16,7 @@ export async function load({ fetch, url }) {
 		eventData[event] = {
 			data,
 			timeSinceLastEvent: timeSinceLastEvent(data ?? '')
-		};
+		} as { [key: string]: string };
 	}
 
 	if (events) {

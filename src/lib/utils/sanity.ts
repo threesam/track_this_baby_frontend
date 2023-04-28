@@ -29,28 +29,6 @@ export async function getEvents(): Promise<Event[]> {
 	);
 }
 
-export async function getEvent(slug: string): Promise<Event> {
-	return await client.fetch(
-		groq`*[_type == "event" && slug.current == $slug][0]{
-		...,
-		mainImage{
-			asset->{
-				...
-			}
-		}
-	}`,
-		{
-			slug
-		}
-	);
-}
-
-export async function updateEvent(slug: string): Promise<Event> {
-	return await client.fetch(groq`*[_type == "event" && slug.current == $slug][0]`, {
-		slug
-	});
-}
-
 export interface Event {
 	_type: 'event';
 	_createdAt: string;

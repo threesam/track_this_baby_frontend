@@ -1,6 +1,23 @@
-<script>
-	export let data;
-	console.log(Object.entries(data.eventData));
+<script lang="ts">
+	import type { PageData } from './$types';
+	export let data: PageData;
+
+	let hours = {} as {[key:string]: number[]}
+	// @ts-ignore
+	Object.entries(data.eventData).forEach(([type, {data}]) => {
+		const timestamps: string[] = data.split('|')
+		const hArray =  timestamps.reduce((acc, curr) => {
+			const hour = new Date(+curr).getHours()
+			if(!acc[hour]) {
+				acc[hour] = 1
+			} else {
+				acc[hour]++
+			}
+			return acc
+		}, {})
+		hours[type] = hArray
+	});
+	console.log({hours})
 	import '../app.css';
 	import { fade } from 'svelte/transition';
 	import Confetti from 'svelte-confetti';
@@ -48,7 +65,7 @@
 			{#if !data.eventData}
 				<h1 in:typewriter class="mt-[30%] text-white">okay, chill dude..</h1>
 			{:else}
-				<ul class="mt-12 flex flex-col text-white">
+				<!-- <ul class="mt-12 flex flex-col text-white">
 					{#each Object.entries(data.eventData) as [key, value]}
 						<li class="grid grid-cols-2 items-center py-5">
 							<h3 class="pr-5 text-right">{key}</h3>
@@ -60,6 +77,20 @@
 								<h5 class="text-slate-400">total clicks</h5>
 								<p>{value.data?.split('|').length ?? 0}</p>
 							</div>
+						</li>
+					{/each}
+				</ul> -->
+
+				<ul class="flex gap-5 mt-12">
+					{#each Object.entries(hours) as [key, values]}
+						<li class="text-light w-max p-2">
+							<h3 class="text-pink-500 border-b-2 border-yellow-600">{key}</h3>
+							<ul>
+								<li class="w-full flex justify-between gap-2"><span class="text-pink-300">time</span><span class="text-pink-300/30">amount</span></li>
+								{#each Object.entries(values) as [time, amount]}
+									<li class="w-full flex justify-between"><span class="text-pink-300">{+time > 12 ? `${+time - 12}pm` : `${time}am`}</span><span>{amount}</span></li>
+								{/each}
+							</ul>
 						</li>
 					{/each}
 				</ul>
