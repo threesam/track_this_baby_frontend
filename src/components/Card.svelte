@@ -9,10 +9,10 @@
 	$: showCount = false;
 
 	async function countEvent(slug: string) {
-		const countRes = await fetch(`/worker?event=${slug}`, { method: 'POST' });
-		const text = await countRes.text();
+		// const countRes = await fetch(`/worker?event=${slug}`, { method: 'POST' });
+		// const text = await countRes.text();
 
-		count = text.split('|').length;
+		// count = text.split('|').length;
 		showCount = true;
 		setTimeout(() => {
 			showCount = false;
@@ -56,8 +56,9 @@
 			{event.title}
 			{#if showCount}
 				<Confetti
-					amount={100}
-					colorArray={isYikes ? ['red', 'black'] : ['green', 'white', 'pink']}
+					amount={isYikes ? 20 : 100}
+					size={isYikes ? 100 : 50}
+					colorArray={isYikes ? ['url("https://www.nicepng.com/png/detail/23-232230_finger-clipart-middle-finger-emoji-middle-finger-emoji.png")'] : ['green', 'white', 'pink']}
 				/>
 			{/if}
 		</button>
