@@ -57,7 +57,7 @@
 			transition:fade={{ duration: 200 }}
 			on:click={() => (showModal = false)}
 			on:keypress={() => (showModal = false)}
-			class="absolute inset-0 z-10 flex justify-center bg-black"
+			class="absolute inset-0 z-10 flex h-screen justify-center bg-black"
 		>
 			<button class="absolute right-5 top-5 text-red-400" on:click={() => (showModal = false)}
 				>close</button
@@ -84,9 +84,9 @@
 				<ul class="flex gap-5 mt-12">
 					{#each Object.entries(hours) as [key, values]}
 						<li class="text-light w-max p-2">
-							<h3 class="text-pink-500 border-b-2 border-yellow-600">{key}</h3>
+							<h3 class="text-pink-500 border-b-2 pb-1 border-pink-600">{key}</h3>
 							<ul>
-								<li class="w-full flex justify-between gap-2"><span class="text-pink-300">time</span><span class="text-pink-300/30">amount</span></li>
+								<li class="w-full flex justify-between gap-2 py-1"><span class="text-yellow-300">time</span><span class="text-yellow-300">X</span></li>
 								{#each Object.entries(values) as [time, amount]}
 									<li class="w-full flex justify-between"><span class="text-pink-300">{+time > 12 ? `${+time - 12}pm` : `${time}am`}</span><span>{amount}</span></li>
 								{/each}
