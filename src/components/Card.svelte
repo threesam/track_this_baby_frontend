@@ -9,10 +9,10 @@
 	$: showCount = false;
 
 	async function countEvent(slug: string) {
-		// const countRes = await fetch(`/worker?event=${slug}`, { method: 'POST' });
-		// const text = await countRes.text();
+		const countRes = await fetch(`/worker?event=${slug}`, { method: 'POST' });
+		const text = await countRes.text();
+		count = text.split('|').length;
 
-		// count = text.split('|').length;
 		showCount = true;
 		setTimeout(() => {
 			showCount = false;
