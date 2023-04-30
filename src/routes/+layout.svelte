@@ -28,7 +28,7 @@
 		showHearts = true;
 		setTimeout(() => {
 			showHearts = false;
-		}, 2000);
+		}, 6900);
 	}
 
 	function typewriter(node, { speed = 1 }) {

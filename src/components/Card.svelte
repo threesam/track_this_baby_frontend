@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/utils/image';
 	import type { Event } from '$lib/utils/sanity';
 	import { fade } from 'svelte/transition';
@@ -16,7 +15,7 @@
 		showCount = true;
 		setTimeout(() => {
 			showCount = false;
-		}, 3000);
+		}, 6900);
 	}
 
 	export let event: Event;
@@ -24,6 +23,8 @@
 
 	const isYikes = event.tags?.includes('yikes');
 	const color = isYikes ? 'bg-red-950' : 'bg-black';
+
+	const src = urlFor(event.mainImage?.asset.url).auto('format').url()
 </script>
 
 <div>
@@ -37,8 +38,8 @@
 						class="absolute inset-0 transition duration-300 hover:opacity-0"
 						in:fade={{ delay: 400 }}
 						out:fade={{ duration: 400 }}
-						src={event.mainImage?.asset.url}
-						alt={event.mainImage.altText}
+						src={src}
+						alt={'who cares'}
 					/>
 				{/if}
 			{:else}
@@ -57,7 +58,7 @@
 			{#if showCount}
 				<Confetti
 					amount={isYikes ? 20 : 100}
-					size={isYikes ? 100 : 50}
+					size={isYikes ? 100 : 13}
 					colorArray={isYikes ? ['url("https://www.nicepng.com/png/detail/23-232230_finger-clipart-middle-finger-emoji-middle-finger-emoji.png")'] : ['green', 'white', 'pink']}
 				/>
 			{/if}

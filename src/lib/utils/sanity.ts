@@ -35,7 +35,7 @@ export interface Event {
 	title?: string;
 	slug: Slug;
 	excerpt?: string;
-	mainImage?: ImageAsset;
+	mainImage?: { asset: ImageAsset };
 	count?: number;
 	body: PortableTextBlock[];
 	tags: string[];
