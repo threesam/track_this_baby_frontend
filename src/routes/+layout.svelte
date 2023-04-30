@@ -88,7 +88,7 @@
 							<ul>
 								<li class="w-full flex justify-between gap-2 py-1"><span class="text-yellow-300">time</span><span class="text-yellow-300">X</span></li>
 								{#each Object.entries(values) as [time, amount]}
-									<li class="w-full flex justify-between"><span class="text-pink-300">{+time > 11 ? `${+time - 12}pm` : `${time}am`}</span><span>{amount}</span></li>
+									<li class="w-full flex justify-between"><span class="text-pink-300">{+time > 12 ? `${+time - 12}pm` : `${time}${+time === 12 ? 'pm' : 'am'}`}</span><span>{amount}</span></li>
 								{/each}
 							</ul>
 						</li>
